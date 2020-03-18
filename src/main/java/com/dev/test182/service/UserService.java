@@ -10,4 +10,5 @@ public interface UserService {
 
     User getByLogin(String login);
 
+    User changePassword(String login, String oldPassword, String password, String repeatedPassword);
 }

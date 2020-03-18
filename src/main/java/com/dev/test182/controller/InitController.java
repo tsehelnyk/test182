@@ -23,19 +23,16 @@ public class InitController {
         Role roleAdmin = new Role();
         roleAdmin.setRoleName("ADMIN");
         roleAdmin = roleService.save(roleAdmin);
-        User admin = new User();
-        admin.setLogin("admin");
-        admin.setPassword(passwordEncoder.encode("123"));
-        admin.getRoles().add(roleAdmin);
-        userService.save(admin);
 
         Role roleUser = new Role();
         roleUser.setRoleName("USER");
-        roleUser = roleService.save(roleUser);
-        User user = new User();
-        user.setLogin("user");
-        user.setPassword(passwordEncoder.encode("123"));
-        user.getRoles().add(roleUser);
-        userService.save(user);
+        roleService.save(roleUser);
+
+        User admin = new User();
+        admin.setLogin("admin");
+        admin.setName("Admin");
+        admin.setPassword(passwordEncoder.encode("123"));
+        admin.getRoles().add(roleAdmin);
+        userService.save(admin);
     }
 }

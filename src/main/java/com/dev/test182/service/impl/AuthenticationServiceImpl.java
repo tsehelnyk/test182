@@ -23,7 +23,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public User login(String login, String password) {
         User user = userService.getByLogin(login);
         if (user == null
-                || !user.getPassword().equals(passwordEncoder.encode(password))) {
+                || ! passwordEncoder.matches(password, user.getPassword())) {
             throw new RuntimeException("Wrong login or password");
         }
         return user;
@@ -37,15 +37,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (!userDto.getPassword().equals(userDto.getRepeatedPassword())) {
             throw new RuntimeException("Passwords do not match!");
         }
-
         User user = new User();
+        user.setName(userDto.getName());
         user.setLogin(userDto.getLogin());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setIp(userDto.getIp());
-
         Role roleUser = roleRepository.getRoleByRoleName("USER");
-        user.getRoles().add(roleUser);;
-
+        user.getRoles().add(roleUser);
         return userService.save(user);
     }
 }
