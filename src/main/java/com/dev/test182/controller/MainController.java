@@ -3,27 +3,28 @@ package com.dev.test182.controller;
 import com.dev.test182.model.User;
 import com.dev.test182.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
-    @Autowired
-    UserService userService;
+    private static final String DEFAULT_NAME = "anonymous";
 
-    @GetMapping("/index")
-    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/")
+    public String greeting(Model model, Authentication authentication) {
+        String name = DEFAULT_NAME;
+        if (authentication != null) {
+            User user = userService.getByLogin(authentication.getName());
+            if (user != null) {
+                name = user.getName();
+            } else authentication.setAuthenticated(false);
+        }
         model.addAttribute("name", name);
-        User user = new User();
-        user.setLogin("Bob");
-        user.setPassword("123");
-        user.setTimeZone("00:00");
-        user.setIp("10.0.0.0");
-        user = userService.save(user);
         return "index";
     }
-
 }
-

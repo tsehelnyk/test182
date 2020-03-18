@@ -1,15 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>About</title>
+    <title>Main page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
 
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal">Test182</h5>
+    <h5 class="my-0 mr-md-auto font-weight-normal" th:text="'Hello, ' + ${name} + '! This is main page.'"></h5>
     <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="/">Main</a>
         <a class="p-2 text-dark" href="/login">Login</a>
         <a class="p-2 text-dark" href="/account">User account</a>
         <a class="p-2 text-dark" href="/index">About</a>
@@ -17,7 +18,9 @@
     <a class="btn btn-outline-primary" href="/register">Sign up</a>
 </div>
 
-<p th:text="'Hello, ' + ${name} + '!'"/>
-
+<p class="mb-1"></p>
+<footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">test182 © 2020 Tsehelnyk Yevhen</p>
+</footer>
 </body>
 </html>
