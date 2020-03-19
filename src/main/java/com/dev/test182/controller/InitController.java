@@ -6,6 +6,7 @@ import com.dev.test182.service.RoleService;
 import com.dev.test182.service.UserService;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,8 @@ public class InitController {
     private RoleService roleService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Value("${spring.application.admin_password}")
+    private String password;
 
     @PostConstruct
     private void postConstruct() {
@@ -31,7 +34,7 @@ public class InitController {
         User admin = new User();
         admin.setLogin("admin");
         admin.setName("Admin");
-        admin.setPassword(passwordEncoder.encode("123"));
+        admin.setPassword(passwordEncoder.encode(password));
         admin.getRoles().add(roleAdmin);
         userService.save(admin);
     }

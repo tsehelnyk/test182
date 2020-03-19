@@ -52,7 +52,8 @@ public class UserController {
                                        RedirectAttributes attributes,
                                        @RequestParam(name = "old_password") String oldPassword,
                                        @RequestParam(name = "password") String password,
-                                       @RequestParam(name = "repeated_password") String repeatedPassword) {
+                                       @RequestParam(name = "repeated_password")
+                                                   String repeatedPassword) {
         User user = userService.changePassword(authentication.getName(),
                 oldPassword, password, repeatedPassword);
         attributes.addAttribute("msg", "Password was changed!");

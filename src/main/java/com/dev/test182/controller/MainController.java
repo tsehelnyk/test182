@@ -22,7 +22,9 @@ public class MainController {
             User user = userService.getByLogin(authentication.getName());
             if (user != null) {
                 name = user.getName();
-            } else authentication.setAuthenticated(false);
+            } else {
+                authentication.setAuthenticated(false);
+            }
         }
         model.addAttribute("name", name);
         return "index";

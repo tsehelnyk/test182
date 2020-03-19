@@ -42,6 +42,4 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(password));
         return save(user);
     }
-
-
 }

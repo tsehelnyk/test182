@@ -20,7 +20,8 @@ public class AuthenticationController {
     private WebUtils webUtils;
 
     @GetMapping("/registration")
-    public String registration(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
+    public String registration(@RequestParam(name = "name", required = false,
+            defaultValue = "World") String name, Model model) {
         model.addAttribute("name", name);
         return "registration";
     }
@@ -29,7 +30,8 @@ public class AuthenticationController {
     public RedirectView register(@RequestParam(name = "name") String name,
                                  @RequestParam(name = "login") String login,
                                  @RequestParam(name = "password") String password,
-                                 @RequestParam(name = "repeated_password") String repeatedPassword) {
+                                 @RequestParam(name = "repeated_password")
+                                             String repeatedPassword) {
         UserRegistrationDto userDto = new UserRegistrationDto();
         userDto.setName(name);
         userDto.setLogin(login);
